@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <p>name</p>
+        <input type="text" name="name" placeholder="name" class="input-s1" id="input1" onchange="checkPassword()">
+        <p>emil</p>
+        <input type="email" name="email" placeholder="email" class="input-s1" id="input2">
+        <p>password</p>
+        <input type="password" name="password" placeholder="password">
+        <p><input type="submit" name="submit" value="submit"></p>
+    </from>
+
+<script>
+       function checkPassword(){
+            var input1 = document.getElementById("input1");
+            alert(input1.value);
+       }
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <form method="post" action="{% url 'login2' %}">
+        {% csrf_token %}
+        <p>emil</p>
+        <input type="email" name="email" placeholder="email" class="input-s1" id="input2">
+        <p>password</p>
+        <input type="password" name="password" placeholder="password">
+        <p><input type="submit" name="submit" value="submit"></p>
+    </from>
+
+</body>
+</html>

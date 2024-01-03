@@ -1,5 +1,6 @@
 from django.shortcuts import render ,redirect
 from user.models import User
+from django.contrib.auth import authenticate, login, logout
 # from django.core import serializers
 import bcrypt
 # import json
@@ -30,7 +31,7 @@ def register_view(request):
     else:
         return render(request, 'user/register.html')
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -38,8 +39,8 @@ def login(request):
         user = User.objects.filter(email=email).first()
         if user:
             db_password = user.password
-            if bcrypt.checkpw(password.encode('utf-8'), db_password.encode('utf-8')):
-               
+            if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+            # if authenticate(request, email=email, password=password):
 
                 # Set a session value
                 request.session['session_key'] = convert_json(user)
@@ -49,8 +50,11 @@ def login(request):
 
                 # Delete a session value
                 # del request.session['session_key']
+                
+                
                 print('login successful')
-                return redirect('/login')
+                login(request, user)
+                return redirect('/home')
             else:
                 return redirect('/login2')
         else:
